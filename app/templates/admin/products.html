@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Admin: Products</h2>
+  <a href="{{ url_for('main.admin_new_product') }}" class="btn btn-success mb-3">New Product</a>
+  <table class="table">
+    <thead><tr><th>ID</th><th>Title</th><th>Price</th><th>Stock</th><th></th></tr></thead>
+    <tbody>
+      {% for p in products %}
+      <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.title }}</td>
+        <td>{{ p.price }}</td>
+        <td>{{ p.stock }}</td>
+        <td>
+          <a href="{{ url_for('main.admin_edit_product', product_id=p.id) }}" class="btn btn-sm btn-primary">Edit</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

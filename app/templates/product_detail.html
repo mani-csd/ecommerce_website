@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-6">
+      {% if product.image %}
+      <img src="{{ url_for('static', filename='uploads/' ~ product.image) }}" class="img-fluid" />
+      {% endif %}
+    </div>
+    <div class="col-md-6">
+      <h2>{{ product.title }}</h2>
+      <p>{{ product.description }}</p>
+      <h4>{{ product.price }} USD</h4>
+      <form method="post" action="{{ url_for('main.add_to_cart', product_id=product.id) }}">
+        <input type="number" name="quantity" value="1" min="1" class="form-control mb-2" style="width:120px">
+        <button class="btn btn-success">Add to cart</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

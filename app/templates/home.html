@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Products</h1>
+  <div class="row">
+    {% for p in products.items %}
+    <div class="col-md-4">
+      <div class="card mb-3">
+        {% if p.image %}
+        <img src="{{ url_for('static', filename='uploads/' ~ p.image) }}" class="card-img-top" style="height:200px; object-fit:cover;">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ p.title }}</h5>
+          <p class="card-text">{{ p.price }} USD</p>
+          <a href="{{ url_for('main.product_detail', product_id=p.id) }}" class="btn btn-primary">View</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <nav>
+    <ul class="pagination">
+      {% if products.has_prev %}
+      <li class="page-item"><a class="page-link" href="?page={{ products.prev_num }}&q={{ q }}">Prev</a></li>
+      {% endif %}
+      {% if products.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ products.next_num }}&q={{ q }}">Next</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endblock %}
